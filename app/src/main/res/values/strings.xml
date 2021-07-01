@@ -1,0 +1,8 @@
+<resources>
+  <string name="app_name">StuWatch</string>
+  <string name="title_activity_input_data">InputData</string>
+  <string name="tab_text_1">PENGETAHUAN</string>
+  <string name="tab_text_3">CATATAN</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

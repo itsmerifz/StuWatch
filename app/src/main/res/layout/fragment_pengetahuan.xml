@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentPengetahuan">
+
+  <!-- TODO: Update blank fragment layout -->
+
+  <TextView
+      android:id="@+id/tv_namaS"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="28dp"
+      android:fontFamily="@font/montserrat_bold"
+      android:text="TextView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.046"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txIPAErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.22"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tv_namaS"
+      app:layout_constraintVertical_bias="0.051">
+
+    <EditText
+        android:id="@+id/txIPA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="IPA"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txIPSErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="32dp"
+      app:errorEnabled="true"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/txIPAErr"
+      app:layout_constraintTop_toBottomOf="@+id/tv_namaS">
+
+    <EditText
+        android:id="@+id/txIPS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="IPS"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txInggrisErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.22"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txIPAErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txInggris"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Bahasa Inggris"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txIndoErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.505"
+      app:layout_constraintStart_toEndOf="@+id/txInggrisErr"
+      app:layout_constraintTop_toBottomOf="@+id/txIPSErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txIndo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Bahasa Indonesia"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txSenbudErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.22"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txInggrisErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txSenbud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Seni Budaya"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txAgamaErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.505"
+      app:layout_constraintStart_toEndOf="@+id/txSenbudErr"
+      app:layout_constraintTop_toBottomOf="@+id/txIndoErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txAgama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Agama"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txPknErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.22"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txSenbudErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txPkn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="PKN"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/txPenjasErr"
+      android:layout_width="130dp"
+      android:layout_height="50dp"
+      app:errorEnabled="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.505"
+      app:layout_constraintStart_toEndOf="@+id/txPknErr"
+      app:layout_constraintTop_toBottomOf="@+id/txAgamaErr"
+      app:layout_constraintVertical_bias="0.061">
+
+    <EditText
+        android:id="@+id/txPenjas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Penjas"
+        android:inputType="number" />
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/floatingActionButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="48dp"
+      android:clickable="true"
+      android:src="@drawable/ic_baseline_check_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
