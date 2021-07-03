@@ -29,11 +29,11 @@ import java.util.Map;
 
 public class DaftarAkun extends AppCompatActivity {
   public static final String TAG = "TAG";
-  EditText edEmail,edNama,edPass,edRPass;
-  String nama,email,pass,rpass,uid;
+  EditText edEmail,edNama,edPass,edRPass,edAlamat;
+  String nama,email,pass,rpass,uid,alamat;
   Button btnDaftar;
   TextView txGotoLogin;
-  TextInputLayout mailErr,passErr,namaErr,rpassErr;
+  TextInputLayout mailErr,passErr,namaErr,rpassErr,alamatErr;
   ProgressBar progressBar;
   FirebaseAuth fAuth;
   FirebaseFirestore fStore;
@@ -47,12 +47,14 @@ public class DaftarAkun extends AppCompatActivity {
     edNama = findViewById(R.id.txNama);
     edPass = findViewById(R.id.txPass);
     edRPass = findViewById(R.id.txRPass);
+    edAlamat = findViewById(R.id.txAlamat);
     btnDaftar = findViewById(R.id.btnDaftar);
     txGotoLogin = findViewById(R.id.txLogin);
     mailErr = findViewById(R.id.txEmailErr);
     passErr = findViewById(R.id.txPassErr);
     namaErr = findViewById(R.id.txNamaErr);
     rpassErr = findViewById(R.id.txRPassErr);
+    alamatErr = findViewById(R.id.txAlamatErr);
     progressBar = findViewById(R.id.progressBar);
 
     fAuth =FirebaseAuth.getInstance();
@@ -63,7 +65,8 @@ public class DaftarAkun extends AppCompatActivity {
       public void onClick(View v) {
         email = edEmail.getText().toString().trim();
         pass = edPass.getText().toString().trim();
-        nama = edNama.getText().toString().trim();
+        nama = edNama.getText().toString();
+        alamat = edAlamat.getText().toString();
         if (isValidate()){
           progressBar.setVisibility(View.VISIBLE); // Set Visibilitas Progress Bar
 
@@ -101,6 +104,7 @@ public class DaftarAkun extends AppCompatActivity {
     Map<String,Object> akun = new HashMap<>();
     akun.put("nama",nama);
     akun.put("email",email);
+    akun.put("alamat",alamat);
     documentReference.set(akun).addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {
@@ -119,31 +123,26 @@ public class DaftarAkun extends AppCompatActivity {
     nama = edNama.getText().toString().trim();
     pass = edPass.getText().toString().trim();
     rpass = edRPass.getText().toString().trim();
+    alamat = edAlamat.getText().toString().trim();
 
     if(email.isEmpty()){
       mailErr.setError("Email harus diisi!");
       return false;
-    }
-
-    if (pass.isEmpty()){
+    } else if (pass.isEmpty()){
       passErr.setError("Password harus diisi!");
       return false;
-    }
-
-    if (nama.isEmpty()){
+    } else if (nama.isEmpty()){
       namaErr.setError("Nama harus diisi");
       return false;
-    }
-
-    if (!pass.equals(rpass)){
+    } else if (!pass.equals(rpass)){
       passErr.setError("Password tidak cocok!");
       rpassErr.setError("Password tidak cocok!");
       return false;
-    }
-
-    if (pass.length() < 6){
+    } else if (pass.length() < 6){
       passErr.setError("Password minimal 6 karakter!");
       return false;
+    } else if (alamat.isEmpty()){
+      alamatErr.setError("Alamat wajib diisi!");
     }
     return true;
   }
