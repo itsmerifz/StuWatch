@@ -7,13 +7,13 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class AdapterFragmentInput extends FragmentStateAdapter {
-  public AdapterFragmentInput(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+  public AdapterFragmentInput(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) { // Konstruktor AdapterFragmentInput
     super(fragmentManager, lifecycle);
   }
 
   @NonNull
   @Override
-  public Fragment createFragment(int position) {
+  public Fragment createFragment(int position) { // Method set Fragment
     switch (position){
       case 1:
         return new FragmentCatatan();

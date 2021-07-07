@@ -7,13 +7,13 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class AdapterFragmentHasil extends FragmentStateAdapter {
-  public AdapterFragmentHasil(@NonNull FragmentManager fragment,@NonNull Lifecycle lc) {
+  public AdapterFragmentHasil(@NonNull FragmentManager fragment,@NonNull Lifecycle lc) { // Konstruktor AdapterFragmentHasil
     super(fragment,lc);
   }
 
   @NonNull
   @Override
-  public Fragment createFragment(int position) {
+  public Fragment createFragment(int position) { // Method set Fragment
     switch (position){
       case 1:
         return new FragmentHasilCatatan();

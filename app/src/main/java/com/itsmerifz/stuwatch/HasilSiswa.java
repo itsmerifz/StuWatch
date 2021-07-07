@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HasilSiswa extends AppCompatActivity {
+  // Deklarasi variabel
   AdapterSiswa adapter;
   private ListView list;
   String nama,nis,kls,kode;
@@ -29,7 +30,8 @@ public class HasilSiswa extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_daftar_siswa);
 
-    db = FirebaseDatabase.getInstance().getReference();
+    db = FirebaseDatabase.getInstance().getReference(); // Get Firebase Realtime Database
+    // Get data dari database
     db.child("siswa").orderByChild("nama").addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -39,7 +41,6 @@ public class HasilSiswa extends AppCompatActivity {
           siswaArrayList.add(s);
         }
       }
-
       @Override
       public void onCancelled(@NonNull DatabaseError error) {
         System.out.println(error.getDetails()+" "+error.getMessage());
@@ -48,23 +49,27 @@ public class HasilSiswa extends AppCompatActivity {
 
     list = findViewById(R.id.listSiswa);
     siswaArrayList = new ArrayList<>();
-
+    // Set tampilan dari adapter yang dituju
     while (true) {
       AdapterSiswa la = new AdapterSiswa(this);
       adapter = la;
       list.setAdapter(la);
+      // Kondisi ketika daftar list diklik
       list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View v, int p, long id) {
+          // Get data dari arraylist
           nama = siswaArrayList.get(p).getNama();
           nis = siswaArrayList.get(p).getNis();
           kls = siswaArrayList.get(p).getKelas();
           kode = siswaArrayList.get(p).getKode();
-          Bundle b = new Bundle();
+          Bundle b = new Bundle(); // Make bundle
+          // Set string kedalam bundle
           b.putString("nama",nama);
           b.putString("nis",nis);
           b.putString("kd",kode);
-          Intent i = new Intent(getApplicationContext(),MenuHasilSiswa.class);
+          Intent i = new Intent(getApplicationContext(),MenuHasilSiswa.class); // Make Intent
+          // Masukkan data bundle kedalam intent
           i.putExtras(b);
           startActivity(i);
         }

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginAkun extends AppCompatActivity {
+  // Deklarasi Variabel
   public static final String TAG = "TAG";
   TextInputLayout mailErr,passErr;
   EditText email,pass;
@@ -42,8 +43,9 @@ public class LoginAkun extends AppCompatActivity {
     btLogin = findViewById(R.id.btnLogin);
     progressBar = findViewById(R.id.pbLogin);
     txDaftar = findViewById(R.id.txDaftar);
-    fAuth = FirebaseAuth.getInstance();
+    fAuth = FirebaseAuth.getInstance(); // Get Firebase Auth
 
+    // Kondisi ketika textview diklik
     txDaftar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -51,6 +53,7 @@ public class LoginAkun extends AppCompatActivity {
       }
     });
 
+    // Kondisi ketika tombol login diklik
     btLogin.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -58,14 +61,15 @@ public class LoginAkun extends AppCompatActivity {
         pw = pass.getText().toString().trim();
         if (isValid()){
           progressBar.setVisibility(View.VISIBLE);
+          // Aksi login kedalam firebase
           fAuth.signInWithEmailAndPassword(em,pw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-              if (task.isSuccessful()){
+              if (task.isSuccessful()){ // Jika berhasil
                 Log.d(TAG,"Login Sukses!");
-                FirebaseUser user = fAuth.getCurrentUser();
+                FirebaseUser user = fAuth.getCurrentUser(); // Mengambil data user login
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
-              }else{
+              }else{ // Jika gagal
                 Log.w(TAG,"Login Gagal! \n Kesalahan : "+task.getException());
                 Toast.makeText(getApplicationContext(),"Login Gagal!",Toast.LENGTH_LONG).show();
               }
@@ -77,6 +81,7 @@ public class LoginAkun extends AppCompatActivity {
     });
   }
 
+  // Method validasi input user
   private boolean isValid(){
     em = email.getText().toString().trim();
     pw = pass.getText().toString().trim();
@@ -100,14 +105,17 @@ public class LoginAkun extends AppCompatActivity {
   @Override
   protected void onStart() {
     super.onStart();
-    FirebaseUser user = fAuth.getCurrentUser();
+    FirebaseUser user = fAuth.getCurrentUser(); // Mengambil data user
+    // Cek kondisi jika user sudah login
     if (user != null){
       startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
   }
 
   @Override
+  // Aksi back button
   public void onBackPressed() {
+    // Akhiri aplikasi
     finishAffinity();
     finish();
   }

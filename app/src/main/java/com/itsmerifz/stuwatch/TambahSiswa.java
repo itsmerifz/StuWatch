@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class TambahSiswa extends AppCompatActivity {
+  // Deklarasi variabel
   EditText edNama,edKelas,edNis;
   Button btnAddSiswa;
   TextInputLayout edNamaErr,edKelasErr,edNisErr;
@@ -34,8 +35,9 @@ public class TambahSiswa extends AppCompatActivity {
     edKelasErr = findViewById(R.id.txKelasSErr);
     edNisErr = findViewById(R.id.txNISErr);
     pb = findViewById(R.id.pbDaftarS);
-    db = FirebaseDatabase.getInstance().getReference();
+    db = FirebaseDatabase.getInstance().getReference(); // Get Firebase Realtime Database
 
+    // Kondisi ketika button diklik
     btnAddSiswa.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -52,6 +54,7 @@ public class TambahSiswa extends AppCompatActivity {
     });
   }
 
+  // Method validasi input user
   public boolean isValid(){
     String nama,kelas,nis;
     nama = edNama.getText().toString();
@@ -76,7 +79,9 @@ public class TambahSiswa extends AppCompatActivity {
     return true;
   }
 
+  // Method submit data
   private void submitDataSiswa(Siswa siswa){
+    // Memasukkan data kedalam database
     db.child("siswa").push().setValue(siswa).addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void e) {

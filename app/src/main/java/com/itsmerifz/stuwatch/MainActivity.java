@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+  // Deklarasi Variabel
   public static final String TAG = "TAG";
   List<String> judul;
   List<Integer> gambar;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
   FirebaseAuth fAuth;
   FirebaseFirestore fStore;
   Adapter adapter;
-  boolean confirmExit = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,29 +52,31 @@ public class MainActivity extends AppCompatActivity {
     judul = new ArrayList<>();
     gambar = new ArrayList<>();
 
+    // Set tampilan judul menu
     judul.add("Edit Profil");
     judul.add("Daftar Siswa");
     judul.add("Input Nilai");
     judul.add("Hasil Raport");
-
+    // Set tampilan gambar menu
     gambar.add(R.drawable.ic_baseline_edit_24);
     gambar.add(R.drawable.ic_baseline_person_24);
     gambar.add(R.drawable.ic_round_event_note_24);
     gambar.add(R.drawable.ic_round_file_copy_24);
 
+    // Set adapter
     adapter = new Adapter(this,judul,gambar);
     GridLayoutManager layoutManager = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
     rv.setLayoutManager(layoutManager);
     rv.setAdapter(adapter);
 
-    uid = fAuth.getCurrentUser().getUid();
+    uid = fAuth.getCurrentUser().getUid(); // Get ID user login
     DocumentReference dr = fStore.collection("akun").document(uid);
     dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
       @Override
       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
         if (task.isSuccessful()){
           DocumentSnapshot ds = task.getResult();
-          if (ds.exists()){
+          if (ds.exists()){ // Jika ada
             sapaUser.setText("Selamat Datang, " + ds.getString("nama"));
             Log.d(TAG,"Data : "+ds.getData());
           }else{
@@ -86,24 +88,26 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    // Kondisi jika button keluar diklik
     btKeluar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         logout(v);
       }
     });
-
-
   }
 
+  // Method logout
   private void logout(View v){
-    FirebaseAuth.getInstance().signOut();
+    FirebaseAuth.getInstance().signOut(); // Firebase melakukan aksi logout user
     startActivity(new Intent(getApplicationContext(),LoginAkun.class));
     finish();
   }
 
   @Override
+  // Kondisi ketika menekan tombol back
   public void onBackPressed() {
+    // Akhiri aplikasi
    finishAffinity();
    finish();
   }

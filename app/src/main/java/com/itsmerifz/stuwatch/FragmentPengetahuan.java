@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FragmentPengetahuan extends Fragment {
+  // Deklarasi variabel
   public static final String TAG = "TAG";
   EditText ipa,ips,agama,senbud,penjas,pkn,inggris,indo;
   int nIpa,nIps,nAgama,nSenbud,nPenjas,nPkn,nInggris,nIndo,nRata;
@@ -30,8 +31,7 @@ public class FragmentPengetahuan extends Fragment {
   FloatingActionButton fab;
   TextView tv;
 
-  public FragmentPengetahuan() {
-
+  public FragmentPengetahuan() { // Konstruktor Fragment
   }
 
   @Override
@@ -42,7 +42,7 @@ public class FragmentPengetahuan extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
+    // Inflate layout kedalam fragment
     View v = inflater.inflate(R.layout.fragment_pengetahuan, container, false);
     ipa = v.findViewById(R.id.txIPA);
     ips = v.findViewById(R.id.txIPS);
@@ -54,11 +54,12 @@ public class FragmentPengetahuan extends Fragment {
     indo = v.findViewById(R.id.txIndo);
     tv = v.findViewById(R.id.tv_namaS);
     fab = v.findViewById(R.id.floatingActionButton);
-    db = FirebaseDatabase.getInstance().getReference();
-    Bundle b = getActivity().getIntent().getExtras();
+    db = FirebaseDatabase.getInstance().getReference(); // Get Firebase Realtime Database
+    Bundle b = getActivity().getIntent().getExtras(); // Get bundle dari intent
     tv.setText("Nama     :   "+b.getString("nama"));
     kodee = MenuInputData.kode;
 
+    // Get data dari database
     db.child("siswa").child(kodee).child("nilai").child("pengetahuan").addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -81,9 +82,11 @@ public class FragmentPengetahuan extends Fragment {
       }
     });
 
+    // Kondisi ketika floating action button diklik
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        // mengubah tipe data kedalam bentuk integer
         nIpa = Integer.parseInt(ipa.getText().toString());
         nIps = Integer.parseInt(ips.getText().toString());
         nAgama = Integer.parseInt(agama.getText().toString());
@@ -93,6 +96,7 @@ public class FragmentPengetahuan extends Fragment {
         nSenbud = Integer.parseInt(senbud.getText().toString());
         nPkn = Integer.parseInt(pkn.getText().toString());
 
+        // Membuat rata-rata nilai dari data diatas
         nRata = (nAgama+nPkn+nSenbud+nPenjas+nInggris+nIndo+nIps+nIpa) / 8;
         inputNilai(new Nilai(String.valueOf(nIpa),String.valueOf(nIps),String.valueOf(nPkn),String.valueOf(nSenbud),String.valueOf(nPenjas),String.valueOf(nIndo),String.valueOf(nInggris),String.valueOf(nAgama),String.valueOf(nRata)));
       }
@@ -101,8 +105,10 @@ public class FragmentPengetahuan extends Fragment {
     return v;
   }
 
+  // Method input nilai
   private void inputNilai(Nilai n){
-    db.child("siswa").child(kodee).child("nilai").child("pengetahuan").removeValue();
+    db.child("siswa").child(kodee).child("nilai").child("pengetahuan").removeValue(); // Menghapus data sebelumnya
+    // Mengisi data kedalam database
     db.child("siswa").child(kodee).child("nilai").child("pengetahuan").push().setValue(n).addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {

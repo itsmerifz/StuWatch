@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
 public class MenuInputData extends AppCompatActivity {
+  // Deklarasi Variabel
   TabLayout tl;
   ViewPager2 vp2;
   AdapterFragmentInput adapter;
@@ -21,12 +22,15 @@ public class MenuInputData extends AppCompatActivity {
 
     tl = findViewById(R.id.tabMenuInput);
     vp2 = findViewById(R.id.viewPager);
+    // Set adapter fragment
     FragmentManager fm = getSupportFragmentManager();
     adapter = new AdapterFragmentInput(fm,getLifecycle());
     vp2.setAdapter(adapter);
-    Bundle b = getIntent().getExtras();
+    Bundle b = getIntent().getExtras(); // Get bundle
+    // Get data string dari bundle
     kode = b.getString("kd");
 
+    // Set nama tab fragment
     tl.addTab(tl.newTab().setText(R.string.tab_text_1));
     tl.addTab(tl.newTab().setText(R.string.tab_text_3));
 
@@ -47,6 +51,7 @@ public class MenuInputData extends AppCompatActivity {
       }
     });
 
+    // Kondisi berpindah tab fragment
     vp2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
       @Override
       public void onPageSelected(int position) {

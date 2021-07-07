@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DaftarAkun extends AppCompatActivity {
+  // Deklarasi Variabel
   public static final String TAG = "TAG";
   EditText edEmail,edNama,edPass,edRPass,edAlamat;
   String nama,email,pass,rpass,uid,alamat;
@@ -41,8 +42,9 @@ public class DaftarAkun extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_daftar_akun);
+    setContentView(R.layout.activity_daftar_akun); // Set layout activity
 
+    //Deklarasi id layout dengan variabel
     edEmail = findViewById(R.id.txEmail);
     edNama = findViewById(R.id.txNama);
     edPass = findViewById(R.id.txPass);
@@ -57,12 +59,14 @@ public class DaftarAkun extends AppCompatActivity {
     alamatErr = findViewById(R.id.txAlamatErr);
     progressBar = findViewById(R.id.progressBar);
 
-    fAuth =FirebaseAuth.getInstance();
-    fStore = FirebaseFirestore.getInstance();
+    fAuth =FirebaseAuth.getInstance(); // Set Firebase Authentication
+    fStore = FirebaseFirestore.getInstance(); // Set Firebase Firestore Database
 
+    // Jika button daftar diklik
     btnDaftar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        //Get value dari input user
         email = edEmail.getText().toString().trim();
         pass = edPass.getText().toString().trim();
         nama = edNama.getText().toString();
@@ -70,7 +74,7 @@ public class DaftarAkun extends AppCompatActivity {
         if (isValidate()){
           progressBar.setVisibility(View.VISIBLE); // Set Visibilitas Progress Bar
 
-          //Register user ke firebase
+          // Register user ke firebase
           fAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -89,6 +93,7 @@ public class DaftarAkun extends AppCompatActivity {
       }
     });
 
+    // Jika textview login diklik
     txGotoLogin.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -98,13 +103,15 @@ public class DaftarAkun extends AppCompatActivity {
     });
   }
 
+  // Method submit data
   private void submitData() {
-    uid = fAuth.getCurrentUser().getUid();
+    uid = fAuth.getCurrentUser().getUid(); // Get ID dari user terdaftar
     DocumentReference documentReference = fStore.collection("akun").document(uid);
     Map<String,Object> akun = new HashMap<>();
     akun.put("nama",nama);
     akun.put("email",email);
     akun.put("alamat",alamat);
+    // Tambahkan data dari Map ke dalam database
     documentReference.set(akun).addOnSuccessListener(new OnSuccessListener<Void>() {
       @Override
       public void onSuccess(Void unused) {
@@ -118,6 +125,7 @@ public class DaftarAkun extends AppCompatActivity {
     });
   }
 
+  // Method validasi input
   protected boolean isValidate(){
     email = edEmail.getText().toString().trim();
     nama = edNama.getText().toString().trim();
@@ -151,6 +159,7 @@ public class DaftarAkun extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     FirebaseUser user = fAuth.getCurrentUser();
+    // Cek kondisi jika user sudah terlogin maka langsung terarah ke MainActivity
     if (user != null){
       startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
